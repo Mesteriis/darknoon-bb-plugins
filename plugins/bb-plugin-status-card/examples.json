@@ -1,0 +1,981 @@
+[
+  {
+    "id": "preparing",
+    "title": "Parallel preparation",
+    "asOf": "2026-11-10T23:52:08.765000+00:00",
+    "mode": "historical",
+    "lanes": [
+      {
+        "id": "Trainer",
+        "name": "Trainer"
+      },
+      {
+        "id": "Judge",
+        "name": "Judge"
+      },
+      {
+        "id": "Tasks",
+        "name": "Tasks"
+      },
+      {
+        "id": "Inkling",
+        "name": "Inkling"
+      },
+      {
+        "id": "Platform",
+        "name": "Platform"
+      }
+    ],
+    "items": [
+      {
+        "id": "plans",
+        "lane": "Trainer",
+        "title": "Run 1A + Run 2 plans",
+        "activity": "Preparing",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 19696,
+          "at": "2026-11-10T23:50:01.907000+00:00",
+          "quote": "@thread:thr_zjdtb9ci9b is preparing both plans."
+        },
+        "kind": "task"
+      },
+      {
+        "id": "auralis-rubric",
+        "lane": "Judge",
+        "title": "Auralis initial rubric",
+        "activity": "Writing",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_gi5b3qk4zb",
+          "name": "Rubrics"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 19800,
+          "at": "2026-11-10T23:52:08.765000+00:00",
+          "quote": "@thread:thr_gi5b3qk4zb is writing the initial rubrics for Auralis and for Mosaic version 5"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "mosaic-rubric",
+        "lane": "Judge",
+        "title": "Mosaic v5 initial rubric",
+        "activity": "Writing",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_gi5b3qk4zb",
+          "name": "Rubrics"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 19800,
+          "at": "2026-11-10T23:52:08.765000+00:00",
+          "quote": "@thread:thr_gi5b3qk4zb is writing the initial rubrics for Auralis and for Mosaic version 5"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "bundles",
+        "lane": "Tasks",
+        "title": "Auralis + Mosaic v5 bundles",
+        "activity": "Packaging",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 19800,
+          "at": "2026-11-10T23:52:08.765000+00:00",
+          "quote": "@thread:thr_zjdtb9ci9b is packaging both tasks for the trainer."
+        },
+        "kind": "task"
+      }
+    ],
+    "decisions": [],
+    "sourceThreadId": "thr_rjqma8bikk"
+  },
+  {
+    "id": "overnight",
+    "title": "Training + rewrite",
+    "asOf": "2026-11-11T07:00:52.897000+00:00",
+    "mode": "historical",
+    "lanes": [
+      {
+        "id": "Trainer",
+        "name": "Trainer"
+      },
+      {
+        "id": "Judge",
+        "name": "Judge"
+      },
+      {
+        "id": "Tasks",
+        "name": "Tasks"
+      },
+      {
+        "id": "Inkling",
+        "name": "Inkling"
+      },
+      {
+        "id": "Platform",
+        "name": "Platform"
+      }
+    ],
+    "items": [
+      {
+        "id": "training",
+        "lane": "Trainer",
+        "title": "Run Two \u00b7 step 10",
+        "activity": "Training",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 21069,
+          "at": "2026-11-11T07:00:52.897000+00:00",
+          "quote": "while that step trains and the held-out evaluation runs."
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366",
+        "kind": "run"
+      },
+      {
+        "id": "eval",
+        "lane": "Trainer",
+        "title": "Held-out evaluation",
+        "activity": "Running",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 21069,
+          "at": "2026-11-11T07:00:52.897000+00:00",
+          "quote": "while that step trains and the held-out evaluation runs."
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366",
+        "kind": "run"
+      },
+      {
+        "id": "rewrite",
+        "lane": "Judge",
+        "title": "First rubric rewrite",
+        "activity": "Rewriting",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_gi5b3qk4zb",
+          "name": "Rubrics"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 21069,
+          "at": "2026-11-11T07:00:52.897000+00:00",
+          "quote": "@thread:thr_gi5b3qk4zb is rewriting the rubrics from them now"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "rollouts",
+        "lane": "Tasks",
+        "title": "Step 10 \u00b7 104 rollouts",
+        "activity": "Published",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 21069,
+          "at": "2026-11-11T07:00:52.897000+00:00",
+          "quote": "All 104 rollouts from the tenth training step"
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366",
+        "kind": "run"
+      },
+      {
+        "id": "checkpoint-inventory",
+        "lane": "Inkling",
+        "title": "Run One \u00b7 2 checkpoints",
+        "activity": "Inventory checked",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20829,
+          "at": "2026-11-11T03:14:46.627000+00:00",
+          "quote": "two saved checkpoints from Run One, after 5 steps and after 10"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "adapter-inspection",
+        "lane": "Inkling",
+        "title": "Rank-32 adapter layers",
+        "activity": "Scope confirmed",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20783,
+          "at": "2026-11-11T02:53:31.027000+00:00",
+          "quote": "the adapter is a rank-32 LoRA on the attention layers, the MLP layers and the output"
+        },
+        "kind": "task"
+      }
+    ],
+    "decisions": [],
+    "sourceThreadId": "thr_rjqma8bikk"
+  },
+  {
+    "id": "metrics",
+    "title": "Metrics across agents",
+    "asOf": "2026-11-11T15:46:37.840000+00:00",
+    "mode": "historical",
+    "lanes": [
+      {
+        "id": "Trainer",
+        "name": "Trainer"
+      },
+      {
+        "id": "Judge",
+        "name": "Judge"
+      },
+      {
+        "id": "Tasks",
+        "name": "Tasks"
+      },
+      {
+        "id": "Inkling",
+        "name": "Inkling"
+      },
+      {
+        "id": "Platform",
+        "name": "Platform"
+      }
+    ],
+    "items": [
+      {
+        "id": "run",
+        "lane": "Trainer",
+        "title": "Run Two",
+        "activity": "Training continues",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 22199,
+          "at": "2026-11-11T15:46:37.840000+00:00",
+          "quote": "The running trainer is not touched."
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366",
+        "kind": "run"
+      },
+      {
+        "id": "timings",
+        "lane": "Trainer",
+        "title": "Per-step timings + live rate",
+        "activity": "Building",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 22199,
+          "at": "2026-11-11T15:46:37.840000+00:00",
+          "quote": "**Recorded per step, as it happens** (@thread:thr_zjdtb9ci9b)"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "charts",
+        "lane": "Platform",
+        "title": "Timing + sampling charts",
+        "activity": "Building",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_2w2i3zci5i",
+          "name": "Dashboard"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 22199,
+          "at": "2026-11-11T15:46:37.840000+00:00",
+          "quote": "**Shown on the run page** (@thread:thr_2w2i3zci5i)"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "analysis",
+        "lane": "Trainer",
+        "title": "Step 20 slowdown table",
+        "activity": "Requested",
+        "state": "queued",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 22199,
+          "at": "2026-11-11T15:46:37.840000+00:00",
+          "quote": "I asked the trainer thread for a table of these figures for the steps so far"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "checkpoint-inventory",
+        "lane": "Inkling",
+        "title": "Run One \u00b7 2 checkpoints",
+        "activity": "Inventory checked",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20829,
+          "at": "2026-11-11T03:14:46.627000+00:00",
+          "quote": "two saved checkpoints from Run One, after 5 steps and after 10"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "adapter-inspection",
+        "lane": "Inkling",
+        "title": "Rank-32 adapter layers",
+        "activity": "Scope confirmed",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20783,
+          "at": "2026-11-11T02:53:31.027000+00:00",
+          "quote": "the adapter is a rank-32 LoRA on the attention layers, the MLP layers and the output"
+        },
+        "kind": "task"
+      }
+    ],
+    "decisions": [],
+    "sourceThreadId": "thr_rjqma8bikk"
+  },
+  {
+    "id": "integrity",
+    "title": "Evaluation + recovery",
+    "asOf": "2026-11-11T20:14:23.550000+00:00",
+    "mode": "historical",
+    "lanes": [
+      {
+        "id": "Trainer",
+        "name": "Trainer"
+      },
+      {
+        "id": "Judge",
+        "name": "Judge"
+      },
+      {
+        "id": "Tasks",
+        "name": "Tasks"
+      },
+      {
+        "id": "Inkling",
+        "name": "Inkling"
+      },
+      {
+        "id": "Platform",
+        "name": "Platform"
+      },
+      {
+        "id": "Spend",
+        "name": "Spend",
+        "summary": {
+          "amount": 679.93,
+          "currency": "USD"
+        }
+      }
+    ],
+    "items": [
+      {
+        "id": "complete",
+        "lane": "Trainer",
+        "title": "Run Two \u00b7 $679.93",
+        "activity": "Complete",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "finished all 30 steps at 3:08pm"
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366",
+        "kind": "run"
+      },
+      {
+        "id": "eval3",
+        "lane": "Judge",
+        "title": "Third-rubric evaluation",
+        "activity": "Running",
+        "state": "active",
+        "owner": {
+          "threadId": "thr_gi5b3qk4zb",
+          "name": "Rubrics"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23678,
+          "at": "2026-11-11T20:12:15.519000+00:00",
+          "quote": "The rubric thread's evaluation-only table is still running."
+        },
+        "kind": "task"
+      },
+      {
+        "id": "noapp",
+        "lane": "Platform",
+        "title": "Pages for no-app rollouts",
+        "activity": "Fix requested",
+        "state": "queued",
+        "owner": {
+          "threadId": "thr_2w2i3zci5i",
+          "name": "Dashboard"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23678,
+          "at": "2026-11-11T20:12:15.519000+00:00",
+          "quote": "I've made that urgent for @thread:thr_2w2i3zci5i"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "publish",
+        "lane": "Trainer",
+        "title": "Publish every rollout first",
+        "activity": "Design proposed",
+        "state": "waiting",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23792,
+          "at": "2026-11-11T20:14:23.550000+00:00",
+          "quote": "It is the fix you asked for and would be built before any further run"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "audit",
+        "lane": "Platform",
+        "title": "Five zero-score rollouts",
+        "activity": "Evidence checked",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_rjqma8bikk",
+          "name": "Coordinator"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23678,
+          "at": "2026-11-11T20:12:15.519000+00:00",
+          "quote": "I checked each one's own session and log"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "checkpoint-inventory",
+        "lane": "Inkling",
+        "title": "Run One \u00b7 2 checkpoints",
+        "activity": "Inventory checked",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20829,
+          "at": "2026-11-11T03:14:46.627000+00:00",
+          "quote": "two saved checkpoints from Run One, after 5 steps and after 10"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "adapter-inspection",
+        "lane": "Inkling",
+        "title": "Rank-32 adapter layers",
+        "activity": "Scope confirmed",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20783,
+          "at": "2026-11-11T02:53:31.027000+00:00",
+          "quote": "the adapter is a rank-32 LoRA on the attention layers, the MLP layers and the output"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "spend-total",
+        "lane": "Spend",
+        "kind": "metric",
+        "title": "Run Two",
+        "amount": 679.93,
+        "currency": "USD",
+        "activity": "final",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "$679.93 final on Run Two: $428.09 Tinker + $251.83 Modal"
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366"
+      },
+      {
+        "id": "spend-tinker",
+        "lane": "Spend",
+        "kind": "metric",
+        "title": "Tinker",
+        "amount": 428.09,
+        "currency": "USD",
+        "activity": "",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "$679.93 final on Run Two: $428.09 Tinker + $251.83 Modal"
+        }
+      },
+      {
+        "id": "spend-modal",
+        "lane": "Spend",
+        "kind": "metric",
+        "title": "Modal",
+        "amount": 251.83,
+        "currency": "USD",
+        "activity": "",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "$679.93 final on Run Two: $428.09 Tinker + $251.83 Modal"
+        }
+      }
+    ],
+    "decisions": [
+      {
+        "id": "publish-design",
+        "lane": "Trainer",
+        "question": "Build publishing fix as two PRs?",
+        "options": [
+          {
+            "label": "Approve design",
+            "prompt": "Approve the two-PR publishing design"
+          },
+          {
+            "label": "Revise",
+            "prompt": "Revise the publishing design"
+          }
+        ],
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23792,
+          "at": "2026-11-11T20:14:23.550000+00:00",
+          "quote": "**Needs you: do you approve this design for making every rollout reach production?"
+        },
+        "context": "Publish each rollout\u2019s trace before app collection or judging. Split the work into a database/run-page PR and a trainer PR; resample infrastructure failures."
+      }
+    ],
+    "sourceThreadId": "thr_rjqma8bikk"
+  },
+  {
+    "id": "outage",
+    "title": "Review + deploy queue",
+    "asOf": "2026-11-11T21:12:32.156000+00:00",
+    "mode": "historical",
+    "lanes": [
+      {
+        "id": "Trainer",
+        "name": "Trainer"
+      },
+      {
+        "id": "Judge",
+        "name": "Judge"
+      },
+      {
+        "id": "Tasks",
+        "name": "Tasks"
+      },
+      {
+        "id": "Inkling",
+        "name": "Inkling"
+      },
+      {
+        "id": "Platform",
+        "name": "Platform"
+      },
+      {
+        "id": "Spend",
+        "name": "Spend",
+        "summary": {
+          "amount": 679.93,
+          "currency": "USD"
+        }
+      }
+    ],
+    "items": [
+      {
+        "id": "heldout",
+        "lane": "Platform",
+        "title": "#470 \u00b7 Held-out label",
+        "activity": "Fix pushed",
+        "state": "waiting",
+        "owner": {
+          "threadId": "thr_wu33buwk5q",
+          "name": "Run page"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 24775,
+          "at": "2026-11-11T21:10:54.029000+00:00",
+          "quote": "Two more run-page fixes are pushed and waiting for CI"
+        },
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/470",
+        "kind": "pr",
+        "prState": "open",
+        "ci": "queued"
+      },
+      {
+        "id": "views",
+        "lane": "Platform",
+        "title": "#446 \u00b7 Running rollout views",
+        "activity": "Screenshots checked",
+        "state": "review",
+        "owner": {
+          "threadId": "thr_wu33buwk5q",
+          "name": "Run page"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 24877,
+          "at": "2026-11-11T21:12:32.156000+00:00",
+          "quote": "mergeable with CI green on its current commit"
+        },
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/446",
+        "kind": "pr",
+        "prState": "open",
+        "ci": "passed",
+        "action": {
+          "label": "Merge",
+          "prompt": "Merge #446 \u00b7 Running rollout views"
+        }
+      },
+      {
+        "id": "noapp",
+        "lane": "Platform",
+        "title": "#469 \u00b7 No-app rollout pages",
+        "activity": "",
+        "state": "waiting",
+        "owner": {
+          "threadId": "thr_2w2i3zci5i",
+          "name": "Dashboard"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 24657,
+          "at": "2026-11-11T21:00:19.085000+00:00",
+          "quote": "**CI for three open pull requests:**"
+        },
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/469",
+        "kind": "pr",
+        "prState": "open",
+        "ci": "queued"
+      },
+      {
+        "id": "reward",
+        "lane": "Platform",
+        "title": "#462 \u00b7 Reward chart",
+        "activity": "Deploy queued",
+        "state": "waiting",
+        "owner": {
+          "threadId": "thr_2w2i3zci5i",
+          "name": "Dashboard"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 24657,
+          "at": "2026-11-11T21:00:19.085000+00:00",
+          "quote": "It is merged but not live"
+        },
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/462",
+        "kind": "pr",
+        "prState": "merged",
+        "deployment": "queued"
+      },
+      {
+        "id": "usage",
+        "lane": "Judge",
+        "title": "#459 \u00b7 Recalibration usage",
+        "activity": "Usage documented",
+        "state": "review",
+        "owner": {
+          "threadId": "thr_gi5b3qk4zb",
+          "name": "Rubrics"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 24812,
+          "at": "2026-11-11T21:11:15.783000+00:00",
+          "quote": "now opens with a \"How it is used\" section"
+        },
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/459",
+        "kind": "pr",
+        "prState": "open",
+        "action": {
+          "label": "Merge",
+          "prompt": "Merge #459 \u00b7 Recalibration usage"
+        }
+      },
+      {
+        "id": "checkpoint-inventory",
+        "lane": "Inkling",
+        "title": "Run One \u00b7 2 checkpoints",
+        "activity": "Inventory checked",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20829,
+          "at": "2026-11-11T03:14:46.627000+00:00",
+          "quote": "two saved checkpoints from Run One, after 5 steps and after 10"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "adapter-inspection",
+        "lane": "Inkling",
+        "title": "Rank-32 adapter layers",
+        "activity": "Scope confirmed",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 20783,
+          "at": "2026-11-11T02:53:31.027000+00:00",
+          "quote": "the adapter is a rank-32 LoRA on the attention layers, the MLP layers and the output"
+        },
+        "kind": "task"
+      },
+      {
+        "id": "spend-total",
+        "lane": "Spend",
+        "kind": "metric",
+        "title": "Run Two",
+        "amount": 679.93,
+        "currency": "USD",
+        "activity": "final",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "$679.93 final on Run Two: $428.09 Tinker + $251.83 Modal"
+        },
+        "url": "https://data.fieldwork.software/manage/training/rl_b0c32366"
+      },
+      {
+        "id": "spend-tinker",
+        "lane": "Spend",
+        "kind": "metric",
+        "title": "Tinker",
+        "amount": 428.09,
+        "currency": "USD",
+        "activity": "",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "$679.93 final on Run Two: $428.09 Tinker + $251.83 Modal"
+        }
+      },
+      {
+        "id": "spend-modal",
+        "lane": "Spend",
+        "kind": "metric",
+        "title": "Modal",
+        "amount": 251.83,
+        "currency": "USD",
+        "activity": "",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 23408,
+          "at": "2026-11-11T20:09:14.806000+00:00",
+          "quote": "$679.93 final on Run Two: $428.09 Tinker + $251.83 Modal"
+        }
+      },
+      {
+        "id": "trainer-pr-467",
+        "lane": "Trainer",
+        "kind": "pr",
+        "title": "#467 \u00b7 Per-step speed metrics",
+        "activity": "Ready for review",
+        "state": "review",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_zjdtb9ci9b",
+          "messageSeq": 25040,
+          "at": "2026-11-11T16:07:41.795000+00:00",
+          "quote": "The speed-metrics PR, [fieldwork-software/fieldlabel#467](https://github.com/fieldwork-software/fieldlabel/pull/467), is open with CI green at `060ad61a`. The first CI attempt failed while installing Playwright's system packages, and a rerun of the same commit passed.\n\n- **What it records per round:**\n  - How long sampling, judging, publishing and training took, and the whole round.\n  - Tinker's throughput for the round.\n  - Per-call sampling speed (median and 10th percentile tokens per second, seconds per call), from the recorder's timestamps.\n  - The share of rollout time spent inside model calls.\n  - The slowest rollout.\n\n  Unmeasured values are left empty rather than recorded as 0.\n- **Dashboard:** I sent the key list to the dashboard thread. The live mid-round rate stays on the run page, computed from the running rollouts' token counts, so the heartbeat doesn't change.\n- **Run Two:** unaffected. It keeps its launch code, and the PR applies to runs started after merge.\n\nThe coordinator has the same report. Next for Run Two is the step-25 evaluation report, including step 22's tim"
+        },
+        "ci": "passed",
+        "prState": "open",
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/467",
+        "action": {
+          "label": "Merge",
+          "prompt": "Merge fieldwork-software/fieldlabel#467 after checking its current readiness."
+        }
+      },
+      {
+        "id": "trainer-pr-465",
+        "lane": "Trainer",
+        "kind": "pr",
+        "title": "#465 \u00b7 Modal hang diagnostics",
+        "activity": "Ready for review",
+        "state": "review",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_zjdtb9ci9b",
+          "messageSeq": 23639,
+          "at": "2026-11-11T01:22:21.884000+00:00",
+          "quote": "Run Two finished its first training step (step 0) at 20:21: reward 0.339, $49.92 so far ($26.23 Tinker, $23.68 Modal). The step took 34 minutes.\n\n- **Clean step:** after the step, no orphaned sandboxes were found and none were left live, so the cost tripwire passed. There were no judge rate limits, retries or preemptions at 12 concurrent calls.\n- **Modal cost:** Modal billed $17.46 for the 19:00 hour, about in line with the plan's estimate.\n- **The 19:18 hang:**\n  - The log doesn't name the call. The most likely one is the listing of a shared Modal store of trial status that every poll pass runs: Run One left 1,680 entries there, so one listing took 15 s even when idle.\n  - I deleted those entries (backed up first), and listings now take 0.6 s; a small script keeps the store small.\n  - No timeouts in the 50 minutes since.\n  - I sent the coordinator the full answers on which Modal calls can block and whether the trainer forks.\n- **Fix for next time:** [fieldwork-software/fieldlabel#465](https://github.com/fieldwork-software/fieldlabel/pull/465) names any timed-out call, dumps every th"
+        },
+        "ci": "passed",
+        "prState": "open",
+        "url": "https://github.com/fieldwork-software/fieldlabel/pull/465",
+        "action": {
+          "label": "Merge",
+          "prompt": "Merge fieldwork-software/fieldlabel#465 after checking its current readiness."
+        }
+      },
+      {
+        "id": "faster-collection",
+        "lane": "Trainer",
+        "kind": "task",
+        "title": "Faster trial collection",
+        "activity": "Applied",
+        "state": "done",
+        "owner": {
+          "threadId": "thr_zjdtb9ci9b",
+          "name": "Trainer"
+        },
+        "evidence": {
+          "threadId": "thr_zjdtb9ci9b",
+          "messageSeq": 25158,
+          "at": "2026-11-11T17:29:44.106000+00:00",
+          "quote": "Steps after the change took 21.7, 31.7 and 24.0 minutes, against 37.6 just before. There have been no Modal timeouts or watchdog restarts since."
+        }
+      }
+    ],
+    "decisions": [
+      {
+        "id": "staged",
+        "lane": "Judge",
+        "question": "Ship the staged workflow?",
+        "options": [
+          {
+            "label": "Merge as is",
+            "prompt": "Merge #459 as the staged workflow"
+          },
+          {
+            "label": "Require one command",
+            "prompt": "Hold #459 until it is one command"
+          }
+        ],
+        "evidence": {
+          "threadId": "thr_rjqma8bikk",
+          "messageSeq": 24735,
+          "at": "2026-11-11T21:10:01.928000+00:00",
+          "quote": "It is about a dozen stages someone runs in sequence, taking 45\u201375 minutes."
+        },
+        "context": "About a dozen manual stages, taking 45\u201375 minutes. Making it one unattended command still needs chaining the stages and having the trainer trigger them."
+      }
+    ],
+    "sourceThreadId": "thr_rjqma8bikk"
+  }
+]

@@ -3,8 +3,9 @@
   "schemaVersion": 1,
   "name": "darknoon-bb-plugins",
   "plugins": [
-    { "name": "dev-servers", "source": "./plugins/dev-servers" },
-    { "name": "startup", "source": "./plugins/startup" },
-    { "name": "claude-keychain-guard", "source": "./plugins/claude-keychain-guard" }
+    {"name": "dev-servers", "source": "./plugins/dev-servers"},
+    {"name": "startup", "source": "./plugins/startup"},
+    {"name": "claude-keychain-guard", "source": "./plugins/claude-keychain-guard"},
+    {"name": "status-card", "source": "./plugins/bb-plugin-status-card"}
   ]
 }
