@@ -19,6 +19,8 @@ export interface TimelineRowInput {
   id: string;
   /** The row's first element is a `[data-message-column]` (a chat bubble). */
   isMessageColumn: boolean;
+  /** A mid-turn "Steer" message (it does not end the running turn). */
+  isSteer?: boolean;
 }
 
 const TURN_RE = /(?:^|[|:])turn:([^|:]+)|^([^:|]+-t\d+):/;
@@ -28,20 +30,49 @@ export function rowTurn(messageId: string): string | null {
   return match?.[1] ?? match?.[2] ?? null;
 }
 
+/**
+ * A chat bubble that is not the agent's: a saved user message
+ * (`user-seed:N`) or the optimistic copy bb shows the moment you send
+ * (`r-<random>`). Generated "Message from" rows are not bubbles.
+ */
+function isHumanMessage(messageId: string, row: TimelineRowInput): boolean {
+  return row.isMessageColumn && !messageId.startsWith("assistant:");
+}
+
 export function classifyRows(
   threadId: string,
   rows: readonly TimelineRowInput[],
   running: boolean,
+  /** The latest turn seen while the thread was idle; it is finished. */
+  finishedTurn: string | null = null,
 ): Map<string, RowVisibility> {
   const prefix = `${threadId}:`;
   const result = new Map<string, RowVisibility>();
   const own = rows.filter((row) => row.id.startsWith(prefix));
 
-  // The turn still in progress: the turn of the last row that names one.
+  // The turn still in progress: the turn of the last row that names one,
+  // unless that turn already finished. A turn is finished once bb adds its
+  // "Worked for" row (`<turn>:turn:<n>`) or a new, non-steer human message
+  // follows it (the moment after you send, before the new turn has rows).
   let currentTurn: string | null = null;
   if (running) {
+    let lastIndex = -1;
     for (let i = own.length - 1; i >= 0 && currentTurn === null; i--) {
       currentTurn = rowTurn(own[i]!.id.slice(prefix.length));
+      if (currentTurn !== null) lastIndex = i;
+    }
+    if (currentTurn !== null) {
+      const turn = currentTurn;
+      const hasSummary = own.some((row) =>
+        row.id.slice(prefix.length).startsWith(`${turn}:turn:`),
+      );
+      const humanAfter = own
+        .slice(lastIndex + 1)
+        .some(
+          (row) =>
+            isHumanMessage(row.id.slice(prefix.length), row) && !row.isSteer,
+        );
+      if (hasSummary || humanAfter || turn === finishedTurn) currentTurn = null;
     }
   }
 
@@ -57,8 +88,8 @@ export function classifyRows(
   for (const row of own) {
     const messageId = row.id.slice(prefix.length);
     let visibility: RowVisibility = "hide";
-    if (messageId.startsWith("user-seed:")) {
-      visibility = row.isMessageColumn ? "show" : "hide";
+    if (isHumanMessage(messageId, row)) {
+      visibility = "show";
     } else if (messageId.startsWith("assistant:") && row.isMessageColumn) {
       const turn = rowTurn(messageId);
       visibility =
@@ -71,4 +102,19 @@ export function classifyRows(
     result.set(row.id, visibility);
   }
   return result;
+}
+
+/** The turn named by the thread's last row that names one. */
+export function latestTurn(
+  threadId: string,
+  rows: readonly TimelineRowInput[],
+): string | null {
+  const prefix = `${threadId}:`;
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const id = rows[i]!.id;
+    if (!id.startsWith(prefix)) continue;
+    const turn = rowTurn(id.slice(prefix.length));
+    if (turn !== null) return turn;
+  }
+  return null;
 }

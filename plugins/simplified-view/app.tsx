@@ -5,7 +5,7 @@ import {
   useBbContext,
   useSdk,
 } from "@get-bb/plugin-sdk/app";
-import { classifyRows, type TimelineRowInput } from "./classify";
+import { classifyRows, latestTurn, type TimelineRowInput } from "./classify";
 
 /** Thread plugin metadata key; `true` turns the simplified view on. */
 export const METADATA_KEY = "simplified";
@@ -53,6 +53,10 @@ const STYLE = `
 const TOP_LEVEL_ROWS =
   '[data-timeline-row-list="top-level"] > [data-timeline-items] > [data-timeline-row-id]';
 
+// Latest turn seen while each thread was idle. bb reports "running" a moment
+// before the sent message renders; without this the previous reply flickers.
+const finishedTurns = new Map<string, string | null>();
+
 function applyToDom(threadId: string, running: boolean): void {
   const prefix = `${threadId}:`;
   const elements = [
@@ -62,8 +66,17 @@ function applyToDom(threadId: string, running: boolean): void {
     id: el.getAttribute("data-timeline-row-id")!,
     isMessageColumn:
       el.firstElementChild?.hasAttribute("data-message-column") ?? false,
+    isSteer: [...el.querySelectorAll("[data-message-column] span")].some(
+      (span) => span.textContent?.trim() === "Steer",
+    ),
   }));
-  const visibility = classifyRows(threadId, inputs, running);
+  if (!running) finishedTurns.set(threadId, latestTurn(threadId, inputs));
+  const visibility = classifyRows(
+    threadId,
+    inputs,
+    running,
+    finishedTurns.get(threadId) ?? null,
+  );
   const lists = new Set<HTMLElement>();
   elements.forEach((el, i) => {
     const next = visibility.get(inputs[i]!.id) ?? "show";
