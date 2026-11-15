@@ -105,7 +105,7 @@ const STYLE = `
    on desktop (32px buttons), 4px + 1px in the compact form (40px buttons). */
 [${COMPOSER_ATTR}] [data-promptbox-voice-controls] > div { padding-inline: 7px !important; }
 [${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-voice-controls] > div { padding-inline: 4px !important; }
-[${COMPOSER_ATTR}] p[data-placeholder]::before { content: "Message" !important; }
+[${COMPOSER_ATTR}] p.is-editor-empty[data-placeholder]::before { content: "Message" !important; }
 [${COMPOSER_ATTR}] [data-promptbox-send-menu], [${COMPOSER_ATTR}] [data-promptbox-action-row] button { border-radius: 9999px !important; }
 [${COMPOSER_ATTR}][style*="${COLOR_VAR}"] [data-promptbox-send-menu]:has(button[data-promptbox-submit-action]:not(:disabled)) {
   background: var(${COLOR_VAR}) !important;
