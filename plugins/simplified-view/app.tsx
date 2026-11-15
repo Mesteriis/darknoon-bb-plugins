@@ -86,6 +86,14 @@ const STYLE = `
 [${COMPOSER_ATTR}] form[data-promptbox][data-promptbox-compact] { border-radius: 25px !important; }
 [${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-editor-scroll] { padding-left: 16px !important; }
 [${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-action-row] > :last-child { margin: 0 4px 4px 0 !important; }
+/* Voice recording replaces the + group: centre it instead of using + spacing. */
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > [data-promptbox-voice-controls][data-promptbox-voice-controls] {
+  margin: 0 !important; align-self: center !important; flex: 1 1 auto !important;
+}
+/* Its end buttons sit as far from the side as from the top: 7px + 1px border
+   on desktop (32px buttons), 4px + 1px in the compact form (40px buttons). */
+[${COMPOSER_ATTR}] [data-promptbox-voice-controls] > div { padding-inline: 7px !important; }
+[${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-voice-controls] > div { padding-inline: 4px !important; }
 [${COMPOSER_ATTR}] p[data-placeholder]::before { content: "Message" !important; }
 [${COMPOSER_ATTR}] [data-promptbox-send-menu], [${COMPOSER_ATTR}] [data-promptbox-action-row] button { border-radius: 9999px !important; }
 [${COMPOSER_ATTR}][style*="${COLOR_VAR}"] [data-promptbox-send-menu]:has(button[data-promptbox-submit-action]:not(:disabled)) {
