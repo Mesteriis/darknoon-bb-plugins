@@ -17,6 +17,18 @@ bb plugin install git:https://github.com/darknoon/bb-plugins.git@main --plugin a
 See [plugins/archive-guard](plugins/archive-guard) for what it can and cannot
 enforce.
 
+## Simplified View
+
+A per-thread conversation view: your messages and the agent’s final replies,
+with work rows, progress notes and agent-to-agent messages hidden. Turn it on
+from a thread’s actions menu.
+
+```sh
+bb plugin install git:https://github.com/darknoon/bb-plugins.git@main --plugin simplified-view
+```
+
+See [plugins/simplified-view](plugins/simplified-view) for limits.
+
 ## Dev Servers
 
 Discover development servers running in BB worktrees, follow their linked
