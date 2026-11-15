@@ -64,6 +64,11 @@ const STYLE = `
 [${LABEL_ATTR}] { display: none !important; }
 /* User bubbles as wide as agent bubbles (bb caps them at 70%). */
 [${HUMAN_ATTR}] [data-message-column] > .ml-auto { max-width: 85% !important; }
+/* Chat-app bubble shape for both sides: snug padding, round corners. */
+[${HUMAN_ATTR}] .rounded-xl.bg-surface-recessed,
+[${AGENT_ATTR}] [data-sidebar-swipe-selectable] > [data-markdown-preview] {
+  padding: 7px 13px !important; border-radius: 18px !important; line-height: 1.45;
+}
 /* The user's bubbles are filled with the thread's color. */
 [${LIST_ATTR}][style*="${COLOR_VAR}"] [${HUMAN_ATTR}] .rounded-xl.bg-surface-recessed {
   background: var(${COLOR_VAR}); border-color: transparent;
@@ -77,7 +82,6 @@ const STYLE = `
 /* Agent replies as left-side bubbles, matching the user's bubble. */
 [${AGENT_ATTR}] [data-sidebar-swipe-selectable] > [data-markdown-preview] {
   width: fit-content; max-width: 85%;
-  padding: 10px 16px; border-radius: 12px;
   border: 0; background: var(--surface-recessed);
 }
 [${AGENT_ATTR}] [data-sidebar-swipe-selectable] > [data-markdown-preview] > :last-child { margin-bottom: 0 !important; }
