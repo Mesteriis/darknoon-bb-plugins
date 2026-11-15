@@ -11,6 +11,7 @@ import { classifyRows, type TimelineRowInput } from "./classify";
 export const METADATA_KEY = "simplified";
 const ROW_ATTR = "data-bb-simplified";
 const LIST_ATTR = "data-bb-simplified-list";
+const LABEL_ATTR = "data-bb-simplified-label";
 const BUSY_STATUSES = new Set(["starting", "active", "stopping"]);
 
 // --- Per-thread on/off, shared by the menu action and the overlay ----------
@@ -40,6 +41,7 @@ function readFlag(metadata: unknown): boolean {
 
 // --- Styles ----------------------------------------------------------------
 const STYLE = `
+[${LABEL_ATTR}] { display: none !important; }
 [${ROW_ATTR}="hide"]:not([data-timeline-windowed-realized]) { display: none !important; }
 /* Windowed timelines measure each row; a 0px row falls back to its estimate
    and leaves a gap, so collapse hidden rows to 1px instead. */
@@ -68,6 +70,14 @@ function applyToDom(threadId: string, running: boolean): void {
     if (el.getAttribute(ROW_ATTR) !== next) el.setAttribute(ROW_ATTR, next);
     const list = el.closest<HTMLElement>('[data-timeline-row-list="top-level"]');
     if (list) lists.add(list);
+    // The "Steer" label above mid-turn messages is noise here.
+    if (next === "show") {
+      for (const span of el.querySelectorAll<HTMLElement>("[data-message-column] span")) {
+        if (span.textContent?.trim() === "Steer" && span.parentElement && !span.parentElement.hasAttribute(LABEL_ATTR)) {
+          span.parentElement.setAttribute(LABEL_ATTR, "");
+        }
+      }
+    }
   });
   for (const list of document.querySelectorAll<HTMLElement>(`[${LIST_ATTR}]`)) {
     if (!lists.has(list)) list.removeAttribute(LIST_ATTR);
@@ -79,6 +89,7 @@ function applyToDom(threadId: string, running: boolean): void {
 }
 
 function clearDom(): void {
+  for (const el of document.querySelectorAll(`[${LABEL_ATTR}]`)) el.removeAttribute(LABEL_ATTR);
   for (const el of document.querySelectorAll(`[${ROW_ATTR}]`)) el.removeAttribute(ROW_ATTR);
   for (const el of document.querySelectorAll(`[${LIST_ATTR}]`)) el.removeAttribute(LIST_ATTR);
 }
@@ -95,7 +106,8 @@ function SimplifiedTimeline() {
   const on = threadId !== null && enabled.get(threadId) === true;
 
   useEffect(() => {
-    if (threadId === null || enabled.has(threadId)) return;
+    // Refetch on every visit: another client or an agent may have changed it.
+    if (threadId === null) return;
     let cancelled = false;
     sdk.threads.getPluginMetadata({ threadId }).then(
       (metadata) => {
@@ -147,7 +159,7 @@ export default definePluginApp((app) => {
   app.slots.experimental_threadAction<number>({
     id: "toggle-simplified-view",
     title: "Simplified view",
-    icon: "MessageSquareText",
+    icon: "EyeOff",
     group: "settings",
     useData: ({ threadIds }) => {
       const sdk = useSdk();
@@ -180,10 +192,7 @@ export default definePluginApp((app) => {
       const isOn = enabled.get(thread.id) === true;
       return {
         label: isOn ? "Show full timeline" : "Simplified view",
-        detail: isOn
-          ? "Showing only your messages and the agent's replies"
-          : "Hide work, progress notes and agent-to-agent messages",
-        icon: "MessageSquareText",
+        icon: isOn ? "Eye" : "EyeOff",
         run: async () => {
           const next = !isOn;
           setEnabled(thread.id, next);

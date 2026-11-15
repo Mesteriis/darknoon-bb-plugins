@@ -10,7 +10,7 @@
     "name": "Simplified View",
     "description": "Per-thread conversation view: your messages and the agent's replies, with work, progress notes and agent-to-agent messages hidden.",
     "branding": {
-      "icon": "MessageSquareText"
+      "icon": "EyeOff"
     },
     "server": "./server.ts",
     "app": "./app.tsx"
