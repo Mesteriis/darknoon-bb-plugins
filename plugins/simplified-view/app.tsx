@@ -86,6 +86,17 @@ const STYLE = `
 [${COMPOSER_ATTR}] form[data-promptbox][data-promptbox-compact] { border-radius: 25px !important; }
 [${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-editor-scroll] { padding-left: 16px !important; }
 [${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-action-row] > :last-child { margin: 0 4px 4px 0 !important; }
+/* Phones, focused (not compact): bb grows the buttons to 40px touch targets.
+   Same concentric rule: 50px pill, 5px insets, radius 20 + 5. */
+@media (pointer: coarse) and (max-width: 767px) {
+  [${COMPOSER_ATTR}] form[data-promptbox]:not([data-promptbox-compact]) { border-radius: 25px !important; }
+  [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) form:not([data-promptbox-compact]) [data-promptbox-editor-scroll] {
+    min-height: 48px !important; padding-block: 10px !important; box-sizing: border-box;
+  }
+  [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) form:not([data-promptbox-compact]) [data-promptbox-action-row] > * { margin-bottom: 4px !important; }
+  [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) form:not([data-promptbox-compact]) [data-promptbox-action-row] > :first-child { margin-left: 4px !important; }
+  [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) form:not([data-promptbox-compact]) [data-promptbox-action-row] > :last-child { margin-right: 4px !important; }
+}
 /* Voice recording replaces the + group: centre it instead of using + spacing. */
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > [data-promptbox-voice-controls][data-promptbox-voice-controls] {
   margin: 0 !important; align-self: center !important; flex: 1 1 auto !important;
