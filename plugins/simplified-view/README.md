@@ -7,7 +7,7 @@ notices. While the agent is working, the turn shows only bb's own
 "Working…" line.
 
 Turn it on from a thread's actions menu: **Simplified view**. Turn it off with
-**Show full timeline**. The flag is stored as thread plugin metadata
+**Show full timeline**. **Bubble color** in the same menu fills your bubbles with a per-thread color. Agent replies are gray bubbles; unread ones are a shade stronger, in place of bb's "New" divider. Settings are stored as thread plugin metadata
 (`simplified: true`), so it follows the thread across devices.
 
 ## How it works and its limits
