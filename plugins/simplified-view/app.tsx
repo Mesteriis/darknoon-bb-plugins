@@ -164,8 +164,8 @@ const STYLE = `
   opacity: 0.85;
 }
 /* No "New" divider: unread replies get a brighter bubble instead. */
-[${LIST_ATTR}] [data-timeline-window-key^="divider:"]:not([data-timeline-windowed-realized]) { display: none !important; }
-[${LIST_ATTR}] [data-timeline-window-key^="divider:"][data-timeline-windowed-realized] { height: 1px !important; overflow: hidden !important; visibility: hidden !important; }
+[${LIST_ATTR}] [data-timeline-window-key^="divider:"] { display: none !important; }
+[${LIST_ATTR}] [data-timeline-items][data-timeline-virtual-spacer] > [data-timeline-window-key^="divider:"] { display: block !important; height: 1px !important; overflow: hidden !important; visibility: hidden !important; }
 /* Agent replies as left-side bubbles, matching the user's bubble. */
 [${AGENT_ATTR}] [data-sidebar-swipe-selectable] > [data-markdown-preview] {
   width: fit-content; max-width: 85%;
@@ -176,11 +176,13 @@ const STYLE = `
   /* Unread: a step stronger fill than read replies. */
   background: color-mix(in oklab, var(--foreground) 12%, transparent);
 }
-[${ROW_ATTR}="hide"]:not([data-timeline-windowed-realized]) { display: none !important; }
-/* Windowed timelines measure each row; a 0px row falls back to its estimate
-   and leaves a gap, so collapse hidden rows to 1px instead. */
-[${ROW_ATTR}="hide"][data-timeline-windowed-realized] { height: 1px !important; overflow: hidden !important; }
-[${ROW_ATTR}="hide"][data-timeline-windowed-realized] > * { visibility: hidden !important; }
+[${ROW_ATTR}="hide"] { display: none !important; }
+/* bb marks the windowed items container, not individual realized rows.
+   Its height cache ignores 0px measurements, so display:none leaves stale
+   heights and can replace visible messages with a window spacer. Keep both
+   the measured 1px row and its flex gap in layout, including on mode changes. */
+[data-timeline-items][data-timeline-virtual-spacer] > [${ROW_ATTR}="hide"] { display: block !important; height: 1px !important; overflow: hidden !important; }
+[data-timeline-items][data-timeline-virtual-spacer] > [${ROW_ATTR}="hide"] > * { visibility: hidden !important; }
 `;
 
 // --- DOM pass ----------------------------------------------------------------
