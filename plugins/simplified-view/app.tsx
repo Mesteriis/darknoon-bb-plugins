@@ -82,6 +82,10 @@ const STYLE = `
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :last-child { margin-right: 7px !important; }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-send-menu] { margin-left: 4px !important; }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] button { margin-inline: 0 !important; }
+/* Compact (mobile) form: no +, a 40px button in a 50px pill: 5px insets, radius 20 + 5. */
+[${COMPOSER_ATTR}] form[data-promptbox][data-promptbox-compact] { border-radius: 25px !important; }
+[${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-editor-scroll] { padding-left: 16px !important; }
+[${COMPOSER_ATTR}] form[data-promptbox-compact] [data-promptbox-action-row] > :last-child { margin: 0 4px 4px 0 !important; }
 [${COMPOSER_ATTR}] p[data-placeholder]::before { content: "Message" !important; }
 [${COMPOSER_ATTR}] [data-promptbox-send-menu], [${COMPOSER_ATTR}] [data-promptbox-action-row] button { border-radius: 9999px !important; }
 [${COMPOSER_ATTR}][style*="${COLOR_VAR}"] [data-promptbox-send-menu]:has(button[data-promptbox-submit-action]:not(:disabled)) {
