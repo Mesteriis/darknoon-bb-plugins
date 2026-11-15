@@ -15,6 +15,7 @@ const LIST_ATTR = "data-bb-simplified-list";
 const LABEL_ATTR = "data-bb-simplified-label";
 const AGENT_ATTR = "data-bb-simplified-agent"; // "read" | "unread"
 const HUMAN_ATTR = "data-bb-simplified-human";
+const COMPOSER_ATTR = "data-bb-simplified-composer";
 const COLOR_VAR = "--bb-simplified-user";
 const INK_VAR = "--bb-simplified-user-ink";
 const BUSY_STATUSES = new Set(["starting", "active", "stopping"]);
@@ -61,6 +62,32 @@ function readFlag(metadata: unknown): boolean {
 
 // --- Styles ----------------------------------------------------------------
 const STYLE = `
+/* Composer: one pill with + | text | mic | send, nothing underneath. */
+[${COMPOSER_ATTR}] [data-follow-up-composer-footer],
+[${COMPOSER_ATTR}] button[aria-label^="Provider, model"],
+[${COMPOSER_ATTR}] button[aria-label="Send options"],
+[${COMPOSER_ATTR}] [data-plugin-composer-action-plugin] { display: none !important; }
+[${COMPOSER_ATTR}] form[data-promptbox] { border-radius: 26px !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-main] {
+  display: flex !important; flex-direction: row !important; align-items: flex-end !important;
+}
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-editor-scroll] {
+  min-height: 0 !important; max-height: 40vh; padding: 12px 4px !important;
+}
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-input-region] [data-promptbox-standard-actions] { display: none !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > * { padding-block: 6px; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :first-child { padding-left: 10px; flex: 0 0 auto !important; width: auto !important; }
+[${COMPOSER_ATTR}] p[data-placeholder]::before { content: "Message" !important; }
+[${COMPOSER_ATTR}] [data-promptbox-send-menu], [${COMPOSER_ATTR}] button[data-promptbox-submit-action] { border-radius: 9999px !important; }
+[${COMPOSER_ATTR}][style*="${COLOR_VAR}"] [data-promptbox-send-menu]:has(button[data-promptbox-submit-action]:not(:disabled)) {
+  background: var(${COLOR_VAR}) !important;
+}
+[${COMPOSER_ATTR}][style*="${COLOR_VAR}"] button[data-promptbox-submit-action]:not(:disabled) { color: var(${INK_VAR}) !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :last-child { padding-right: 8px; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] { display: contents !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :first-child { order: -1; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-input-region] { flex: 1 1 auto; min-width: 0; order: 0; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :last-child { order: 1; }
 [${LABEL_ATTR}] { display: none !important; }
 /* User bubbles as wide as agent bubbles (bb caps them at 70%). */
 [${HUMAN_ATTR}] [data-message-column] > .ml-auto { max-width: 85% !important; }
@@ -182,6 +209,32 @@ function applyToDom(threadId: string, running: boolean, color: string | null): v
     }
   }
   const listState = running ? "running" : "idle";
+  // Tag the composer in the same pane as this thread's timeline.
+  const composers = new Set<Element>();
+  for (const list of lists) {
+    let pane: HTMLElement | null = list;
+    while (pane && !pane.querySelector("[data-follow-up-composer]")) pane = pane.parentElement;
+    const composer = pane?.querySelector("[data-follow-up-composer]");
+    if (composer) composers.add(composer);
+  }
+  for (const el of document.querySelectorAll(`[${COMPOSER_ATTR}]`)) {
+    if (!composers.has(el)) {
+      el.removeAttribute(COMPOSER_ATTR);
+      (el as HTMLElement).style.removeProperty(COLOR_VAR);
+      (el as HTMLElement).style.removeProperty(INK_VAR);
+    }
+  }
+  for (const el of composers) {
+    if (!el.hasAttribute(COMPOSER_ATTR)) el.setAttribute(COMPOSER_ATTR, "");
+    const style = (el as HTMLElement).style;
+    if (color === null) {
+      style.removeProperty(COLOR_VAR);
+      style.removeProperty(INK_VAR);
+    } else if (style.getPropertyValue(COLOR_VAR) !== color) {
+      style.setProperty(COLOR_VAR, color);
+      style.setProperty(INK_VAR, colorInk(color));
+    }
+  }
   for (const list of lists) {
     if (list.getAttribute(LIST_ATTR) !== listState) list.setAttribute(LIST_ATTR, listState);
     if (color === null) {
@@ -195,6 +248,11 @@ function applyToDom(threadId: string, running: boolean, color: string | null): v
 }
 
 function clearDom(): void {
+  for (const el of document.querySelectorAll<HTMLElement>(`[${COMPOSER_ATTR}]`)) {
+    el.removeAttribute(COMPOSER_ATTR);
+    el.style.removeProperty(COLOR_VAR);
+    el.style.removeProperty(INK_VAR);
+  }
   for (const el of document.querySelectorAll(`[${AGENT_ATTR}]`)) el.removeAttribute(AGENT_ATTR);
   for (const el of document.querySelectorAll(`[${LABEL_ATTR}]`)) el.removeAttribute(LABEL_ATTR);
   for (const el of document.querySelectorAll(`[${ROW_ATTR}]`)) el.removeAttribute(ROW_ATTR);
