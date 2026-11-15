@@ -62,6 +62,8 @@ function readFlag(metadata: unknown): boolean {
 // --- Styles ----------------------------------------------------------------
 const STYLE = `
 [${LABEL_ATTR}] { display: none !important; }
+/* User bubbles as wide as agent bubbles (bb caps them at 70%). */
+[${HUMAN_ATTR}] [data-message-column] > .ml-auto { max-width: 85% !important; }
 /* The user's bubbles are filled with the thread's color. */
 [${LIST_ATTR}][style*="${COLOR_VAR}"] [${HUMAN_ATTR}] .rounded-xl.bg-surface-recessed {
   background: var(${COLOR_VAR}); border-color: transparent;
