@@ -16,6 +16,7 @@ const LABEL_ATTR = "data-bb-simplified-label";
 const AGENT_ATTR = "data-bb-simplified-agent"; // "read" | "unread"
 const HUMAN_ATTR = "data-bb-simplified-human";
 const COMPOSER_ATTR = "data-bb-simplified-composer";
+const WORKING_ATTR = "data-bb-simplified-working";
 const COLOR_VAR = "--bb-simplified-user";
 const INK_VAR = "--bb-simplified-user-ink";
 const BUSY_STATUSES = new Set(["starting", "active", "stopping"]);
@@ -62,6 +63,27 @@ function readFlag(metadata: unknown): boolean {
 
 // --- Styles ----------------------------------------------------------------
 const STYLE = `
+/* bb's "Working..." line becomes a typing bubble: three pulsing dots. */
+[${WORKING_ATTR}] { padding-inline: 0 !important; }
+[${WORKING_ATTR}] > span {
+  display: inline-flex !important; align-items: center; justify-content: center;
+  width: 56px; height: 36px; border-radius: 18px;
+  background: var(--surface-recessed) !important; animation: none !important;
+  font-size: 0 !important; color: transparent !important; -webkit-text-fill-color: transparent !important;
+}
+[${WORKING_ATTR}] > span::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%; margin-right: 24px;
+  animation: bb-simplified-dots 1.2s ease-in-out infinite;
+}
+@keyframes bb-simplified-dots {
+  0%, 100% { background: color-mix(in oklab, var(--foreground) 55%, transparent);
+    box-shadow: 12px 0 color-mix(in oklab, var(--foreground) 22%, transparent), 24px 0 color-mix(in oklab, var(--foreground) 22%, transparent); }
+  33% { background: color-mix(in oklab, var(--foreground) 22%, transparent);
+    box-shadow: 12px 0 color-mix(in oklab, var(--foreground) 55%, transparent), 24px 0 color-mix(in oklab, var(--foreground) 22%, transparent); }
+  66% { background: color-mix(in oklab, var(--foreground) 22%, transparent);
+    box-shadow: 12px 0 color-mix(in oklab, var(--foreground) 22%, transparent), 24px 0 color-mix(in oklab, var(--foreground) 55%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) { [${WORKING_ATTR}] > span::before { animation-duration: 0s; } }
 /* Composer: one pill with + | text | mic | send, nothing underneath. */
 [${COMPOSER_ATTR}] [data-follow-up-composer-footer],
 [${COMPOSER_ATTR}] button[aria-label^="Provider, model"],
@@ -235,6 +257,18 @@ function applyToDom(threadId: string, running: boolean, color: string | null): v
       list.style.removeProperty(INK_VAR);
     }
   }
+  // bb's "Working..." line sits next to the list, outside the rows.
+  const working = new Set<Element>();
+  for (const list of lists) {
+    const scope = list.closest("[data-scroll-attached]") ?? list.parentElement;
+    for (const span of scope?.querySelectorAll("div.min-h-7 > span.animate-shine") ?? []) {
+      working.add(span.parentElement!);
+    }
+  }
+  for (const el of document.querySelectorAll(`[${WORKING_ATTR}]`)) {
+    if (!working.has(el)) el.removeAttribute(WORKING_ATTR);
+  }
+  for (const el of working) if (!el.hasAttribute(WORKING_ATTR)) el.setAttribute(WORKING_ATTR, "");
   const listState = running ? "running" : "idle";
   // Tag the composer in the same pane as this thread's timeline.
   const composers = new Set<Element>();
@@ -289,6 +323,7 @@ function clearDom(): void {
     el.style.removeProperty(INK_VAR);
   }
   for (const el of document.querySelectorAll(`[${HUMAN_ATTR}]`)) el.removeAttribute(HUMAN_ATTR);
+  for (const el of document.querySelectorAll(`[${WORKING_ATTR}]`)) el.removeAttribute(WORKING_ATTR);
 }
 
 // --- Overlay: owns the DOM pass for the thread in view ----------------------
