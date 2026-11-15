@@ -76,6 +76,17 @@ const STYLE = `
 [${LIST_ATTR}][style*="${COLOR_VAR}"] [${HUMAN_ATTR}] .rounded-xl.bg-surface-recessed * {
   color: var(${INK_VAR}) !important;
 }
+/* Chips inside a colored bubble (inline code, code blocks, @mentions,
+   attachments): tint them with the text color instead of bb's gray. */
+[${LIST_ATTR}][style*="${COLOR_VAR}"] [${HUMAN_ATTR}] .rounded-xl.bg-surface-recessed :is(code:not(pre code), .bg-surface-recessed, .bg-surface-raised, .prompt-mention-pill) {
+  background: color-mix(in oklab, var(${INK_VAR}) 14%, transparent) !important;
+  border-color: color-mix(in oklab, var(${INK_VAR}) 22%, transparent) !important;
+  box-shadow: none !important;
+}
+[${LIST_ATTR}][style*="${COLOR_VAR}"] [${HUMAN_ATTR}] .rounded-xl.bg-surface-recessed blockquote {
+  border-left-color: color-mix(in oklab, var(${INK_VAR}) 45%, transparent) !important;
+  opacity: 0.85;
+}
 /* No "New" divider: unread replies get a brighter bubble instead. */
 [${LIST_ATTR}] [data-timeline-window-key^="divider:"]:not([data-timeline-windowed-realized]) { display: none !important; }
 [${LIST_ATTR}] [data-timeline-window-key^="divider:"][data-timeline-windowed-realized] { height: 1px !important; overflow: hidden !important; visibility: hidden !important; }
@@ -129,6 +140,14 @@ function applyToDom(threadId: string, running: boolean, color: string | null): v
     '[data-timeline-row-list="top-level"] [data-timeline-window-key^="divider:"]',
   );
   elements.forEach((el, i) => {
+    try {
+      tagRow(el, i);
+    } catch (error) {
+      // One odd row must not leave the rest of the thread unstyled.
+      console.error("[simplified-view] row", inputs[i]?.id, error);
+    }
+  });
+  function tagRow(el: HTMLElement, i: number): void {
     const next = visibility.get(inputs[i]!.id) ?? "show";
     if (el.getAttribute(ROW_ATTR) !== next) el.setAttribute(ROW_ATTR, next);
     const isAgent =
@@ -154,7 +173,7 @@ function applyToDom(threadId: string, running: boolean, color: string | null): v
         }
       }
     }
-  });
+  }
   for (const list of document.querySelectorAll<HTMLElement>(`[${LIST_ATTR}]`)) {
     if (!lists.has(list)) {
       list.removeAttribute(LIST_ATTR);
