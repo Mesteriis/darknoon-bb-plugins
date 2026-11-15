@@ -67,7 +67,8 @@ const STYLE = `
 [${COMPOSER_ATTR}] button[aria-label^="Provider, model"],
 [${COMPOSER_ATTR}] button[aria-label="Send options"],
 [${COMPOSER_ATTR}] [data-plugin-composer-action-plugin] { display: none !important; }
-[${COMPOSER_ATTR}] form[data-promptbox] { border-radius: 26px !important; }
+/* Concentric: 32px circles inset 8px from every edge, so radius = 16 + 8. */
+[${COMPOSER_ATTR}] form[data-promptbox] { border-radius: 24px !important; }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-main] {
   display: flex !important; flex-direction: row !important; align-items: flex-end !important;
 }
@@ -75,15 +76,18 @@ const STYLE = `
   min-height: 0 !important; max-height: 40vh; padding: 12px 4px !important;
 }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-input-region] [data-promptbox-standard-actions] { display: none !important; }
-[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > * { padding-block: 6px; }
-[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :first-child { padding-left: 10px; flex: 0 0 auto !important; width: auto !important; }
+/* 7px margins + the form's 1px border = 8px insets. */
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > * { padding: 0 !important; margin-bottom: 7px !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :first-child { margin-left: 7px !important; flex: 0 0 auto !important; width: auto !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :last-child { margin-right: 7px !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-send-menu] { margin-left: 4px !important; }
+[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] button { margin-inline: 0 !important; }
 [${COMPOSER_ATTR}] p[data-placeholder]::before { content: "Message" !important; }
-[${COMPOSER_ATTR}] [data-promptbox-send-menu], [${COMPOSER_ATTR}] button[data-promptbox-submit-action] { border-radius: 9999px !important; }
+[${COMPOSER_ATTR}] [data-promptbox-send-menu], [${COMPOSER_ATTR}] [data-promptbox-action-row] button { border-radius: 9999px !important; }
 [${COMPOSER_ATTR}][style*="${COLOR_VAR}"] [data-promptbox-send-menu]:has(button[data-promptbox-submit-action]:not(:disabled)) {
   background: var(${COLOR_VAR}) !important;
 }
 [${COMPOSER_ATTR}][style*="${COLOR_VAR}"] button[data-promptbox-submit-action]:not(:disabled) { color: var(${INK_VAR}) !important; }
-[${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :last-child { padding-right: 8px; }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] { display: contents !important; }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-action-row] > :first-child { order: -1; }
 [${COMPOSER_ATTR}]:not([data-follow-up-composer-expanded="true"]) [data-promptbox-input-region] { flex: 1 1 auto; min-width: 0; order: 0; }
